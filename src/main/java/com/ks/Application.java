@@ -211,8 +211,20 @@ public class Application
      */
     public static int persistence(long n)
     {
-        //Next is so easy after this
-        return 0;
+        String number = n + "";
+        int dim = number.length();
+        
+        
+        if(dim == 1) 
+        	return (int)n;
+        else {
+        	long aux = 1;
+        	
+        	for(int i=0; i<dim; i++) {
+        		aux = aux * (number.charAt(i)-'0');
+        	}
+        	return persistence(aux);
+        }
     }
 
     /**
