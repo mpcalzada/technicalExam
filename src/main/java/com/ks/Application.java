@@ -371,7 +371,20 @@ public class Application
      */
     public static Integer repeated(int[] values)
     {
-        //Last one!
-        return 0;
+    	String validator = "";
+    	contador = -1;
+    	
+    	for (int n : values) { 
+    		if(validator.contains(String.valueOf(n))) {
+    			contador = n;
+    			break;
+    		}
+    		validator += (n+"");
+    	}
+    	
+    	if(contador != -1) 
+    		return contador;
+    	else
+    		return -1;
     }
 }
