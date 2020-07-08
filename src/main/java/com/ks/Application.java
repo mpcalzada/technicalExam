@@ -58,9 +58,42 @@ public class Application
      * @return if all same words and same quantity from second string exists in first string
      */
     public static boolean scramble(String str1, String str2)
-    {
-        //First tear ;(
-        return false;
+    {    	
+    	HashMap<String, Integer> hash_str1 = new HashMap<String, Integer>(); 
+    	HashMap<String, Integer> hash_str2 = new HashMap<String, Integer>(); 
+    	int counter = 0;
+    	
+    	for(int i=0; i<str1.length(); i++) {
+    		if(!hash_str1.containsKey(Character.toString(str1.charAt(i)))) {
+    			hash_str1.put(Character.toString(str1.charAt(i)),1);
+    		}
+    		else{
+    			hash_str1.put(Character.toString(str1.charAt(i)), hash_str1.get(Character.toString(str1.charAt(i))) + 1);
+    		}
+        }
+        
+        for(int i=0; i<str2.length(); i++) {
+    		if(!hash_str2.containsKey(Character.toString(str2.charAt(i)))) {
+    			hash_str2.put(Character.toString(str2.charAt(i)),1);
+    		}
+    		else{
+    			hash_str2.put(Character.toString(str2.charAt(i)), hash_str2.get(Character.toString(str2.charAt(i))) + 1);
+    		}
+    	}
+        
+        contador = 0;
+        
+        Set<String> keys = hash_str2.keySet();
+        
+        for(String key: keys) {
+        	if(!(hash_str2.get(key) <= hash_str1.get(key))) {
+        		contador += 1;
+        	}
+        }
+        if(contador == 0) 
+        	return true;
+        else
+        	return false;
     }
 
     /**
