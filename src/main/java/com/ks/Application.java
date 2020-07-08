@@ -310,8 +310,26 @@ public class Application
      */
     public static String longToIP(long ip)
     {
-        //yes, can be worse...
-        return "";
+    	String binary = Long.toBinaryString(ip);
+    	String final_ip = "";
+    	
+    	int dim = binary.length();
+    	
+    	if(dim < 32) { // setting format
+    		for(int i=0; i<32-dim; i++) {
+    			binary = "0" + binary;
+    		}
+    	}
+    	contador = 0;
+    	for(int i=0; i<4; i++) {
+    		if(i <= 2)
+    			final_ip += Long.parseLong(binary.substring(contador, contador+8), 2) + ".";
+    		else
+    			final_ip += Long.parseLong(binary.substring(contador, contador+8), 2);
+    		
+    		contador += 8;
+    	}
+        return final_ip;
     }
 
     /**
