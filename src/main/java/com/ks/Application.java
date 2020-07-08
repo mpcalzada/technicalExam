@@ -143,8 +143,29 @@ public class Application
      */
     public static int duplicateCount(String text)
     {
-        //have fun!
-        return 0;
+    	HashMap<String, Integer> hash_text = new HashMap<String, Integer>(); 
+    	
+    	
+    	for(int i=0; i<text.length(); i++) {
+    		
+    		if(!hash_text.containsKey(Character.toString(Character.toLowerCase(text.charAt(i))))) {
+    			hash_text.put(Character.toString(Character.toLowerCase(text.charAt(i))),1);
+    		}
+    		else{
+    			hash_text.put(Character.toString(Character.toLowerCase(text.charAt(i))), hash_text.get(Character.toString(Character.toLowerCase(text.charAt(i)))) + 1);
+    		}
+        }
+    	
+    	contador = 0;
+    	
+		Set<String> keys = hash_text.keySet();
+        
+        for(String key: keys) {
+        	if(hash_text.get(key) >= 2) {
+        		contador += 1;
+        	}
+        }
+        return contador;
     }
 
     /**
