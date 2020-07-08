@@ -1,10 +1,17 @@
 package com.ks;
 
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Set;
+
 /**
  * Exam :)
  */
 public class Application
 {
+    static int contador;
     /**
      * How many centuries have n years ?
      *
@@ -19,8 +26,20 @@ public class Application
      */
     public static int yearsToCenturies(int years)
     {
-        //Let's start!
-        return 0;
+    	if(years != 0) {
+    		double aux = years / 100.0;
+    		double floatPart = aux % 1;
+    		double intPart = aux - floatPart;
+    		
+    		if(floatPart != 0) {
+    			return (int)intPart + 1;
+    		}
+    		else
+    			return (int)intPart;
+    	}
+    	else
+    		return 0;
+        
     }
 
     /**
@@ -39,9 +58,42 @@ public class Application
      * @return if all same words and same quantity from second string exists in first string
      */
     public static boolean scramble(String str1, String str2)
-    {
-        //First tear ;(
-        return false;
+    {    	
+    	HashMap<String, Integer> hash_str1 = new HashMap<String, Integer>(); 
+    	HashMap<String, Integer> hash_str2 = new HashMap<String, Integer>(); 
+    	int counter = 0;
+    	
+    	for(int i=0; i<str1.length(); i++) {
+    		if(!hash_str1.containsKey(Character.toString(str1.charAt(i)))) {
+    			hash_str1.put(Character.toString(str1.charAt(i)),1);
+    		}
+    		else{
+    			hash_str1.put(Character.toString(str1.charAt(i)), hash_str1.get(Character.toString(str1.charAt(i))) + 1);
+    		}
+        }
+        
+        for(int i=0; i<str2.length(); i++) {
+    		if(!hash_str2.containsKey(Character.toString(str2.charAt(i)))) {
+    			hash_str2.put(Character.toString(str2.charAt(i)),1);
+    		}
+    		else{
+    			hash_str2.put(Character.toString(str2.charAt(i)), hash_str2.get(Character.toString(str2.charAt(i))) + 1);
+    		}
+    	}
+        
+        contador = 0;
+        
+        Set<String> keys = hash_str2.keySet();
+        
+        for(String key: keys) {
+        	if(!(hash_str2.get(key) <= hash_str1.get(key))) {
+        		contador += 1;
+        	}
+        }
+        if(contador == 0) 
+        	return true;
+        else
+        	return false;
     }
 
     /**
@@ -62,8 +114,14 @@ public class Application
      */
     public static String getMiddle(String word)
     {
-        //So easy ...
-        return "";
+    	int dim = word.length();
+    	int isOdd = dim & 1;
+    	int middle = word.length()/2;
+    	
+    	if (isOdd == 1)  // odd length
+    		return Character.toString(word.charAt(middle));
+    	else // pair length
+    		return word.substring(1, dim-1);
     }
 
     /**
@@ -85,8 +143,29 @@ public class Application
      */
     public static int duplicateCount(String text)
     {
-        //have fun!
-        return 0;
+    	HashMap<String, Integer> hash_text = new HashMap<String, Integer>(); 
+    	
+    	
+    	for(int i=0; i<text.length(); i++) {
+    		
+    		if(!hash_text.containsKey(Character.toString(Character.toLowerCase(text.charAt(i))))) {
+    			hash_text.put(Character.toString(Character.toLowerCase(text.charAt(i))),1);
+    		}
+    		else{
+    			hash_text.put(Character.toString(Character.toLowerCase(text.charAt(i))), hash_text.get(Character.toString(Character.toLowerCase(text.charAt(i)))) + 1);
+    		}
+        }
+    	
+    	contador = 0;
+    	
+		Set<String> keys = hash_text.keySet();
+        
+        for(String key: keys) {
+        	if(hash_text.get(key) >= 2) {
+        		contador += 1;
+        	}
+        }
+        return contador;
     }
 
     /**
@@ -104,8 +183,15 @@ public class Application
      */
     public static int getCount(String str)
     {
-        //...
-        return 0;
+    	String vowels = "aeiou";
+    	contador = 0;
+    	
+    	for(int i=0; i<str.length(); i++) {
+    		if(vowels.contains(Character.toString(str.charAt(i)))) {
+    			contador += 1;
+    		}
+    	}
+        return contador;
     }
 
     /**
@@ -125,8 +211,20 @@ public class Application
      */
     public static int persistence(long n)
     {
-        //Next is so easy after this
-        return 0;
+        String number = n + "";
+        int dim = number.length();
+        
+        
+        if(dim == 1) 
+        	return (int)n;
+        else {
+        	long aux = 1;
+        	
+        	for(int i=0; i<dim; i++) {
+        		aux = aux * (number.charAt(i)-'0');
+        	}
+        	return persistence(aux);
+        }
     }
 
     /**
@@ -144,8 +242,19 @@ public class Application
      */
     public static int digital_root(int n)
     {
-        //Another easy
-        return 0;
+    	String number = n + "";
+        int dim = number.length();
+        
+        
+        if(dim == 1) 
+        	return (int)n;
+        else {
+        	int aux = 0;
+        	for(int i=0; i<dim; i++) {
+        		aux += (number.charAt(i)-'0');
+        	}
+        	return digital_root(aux);
+        }
     }
 
 
@@ -163,8 +272,24 @@ public class Application
      */
     public static String[] solution(String s)
     {
-        //Will be worse ?
-        return new String[]{};
+        //Will be worse ? Not, It will be easier xD
+    	// I'm going to considerate that whole String is pair length
+    	int dim = s.length();
+    	int isOdd = dim & 1;
+    	
+    	contador = 0;
+    	
+    	if(isOdd == 1) { // convert to pair length
+    		s = s + "_";
+    	}
+    	dim = s.length(); // update dimension
+    	String [] pairs = new String[dim/2];
+    	
+    	for(int i=0; i<dim/2; i++) {
+    		pairs[i] = s.substring(contador,contador+2);
+    		contador += 2;
+    	}
+        return pairs;
     }
 
     /**
@@ -185,8 +310,26 @@ public class Application
      */
     public static String longToIP(long ip)
     {
-        //yes, can be worse...
-        return "";
+    	String binary = Long.toBinaryString(ip);
+    	String final_ip = "";
+    	
+    	int dim = binary.length();
+    	
+    	if(dim < 32) { // setting format
+    		for(int i=0; i<32-dim; i++) {
+    			binary = "0" + binary;
+    		}
+    	}
+    	contador = 0;
+    	for(int i=0; i<4; i++) {
+    		if(i <= 2)
+    			final_ip += Long.parseLong(binary.substring(contador, contador+8), 2) + ".";
+    		else
+    			final_ip += Long.parseLong(binary.substring(contador, contador+8), 2);
+    		
+    		contador += 8;
+    	}
+        return final_ip;
     }
 
     /**
@@ -204,8 +347,15 @@ public class Application
      */
     public static int findShort(String s)
     {
-        //have fun!
-        return 0;
+    	contador = 50; // set a wildcard value, there are not words so big
+
+    	for(String item : s.split(" ")){
+    		int dim = item.length();
+    		if(dim < contador){
+    			contador = dim;
+    		}
+    	}
+        return contador;
     }
 
     /**
@@ -221,7 +371,20 @@ public class Application
      */
     public static Integer repeated(int[] values)
     {
-        //Last one!
-        return 0;
+    	String validator = "";
+    	contador = -1;
+    	
+    	for (int n : values) { 
+    		if(validator.contains(String.valueOf(n))) {
+    			contador = n;
+    			break;
+    		}
+    		validator += (n+"");
+    	}
+    	
+    	if(contador != -1) 
+    		return contador;
+    	else
+    		return -1;
     }
 }
