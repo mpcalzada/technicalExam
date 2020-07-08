@@ -1,10 +1,17 @@
 package com.ks;
 
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Set;
+
 /**
  * Exam :)
  */
 public class Application
 {
+    static int contador;
     /**
      * How many centuries have n years ?
      *
@@ -19,8 +26,20 @@ public class Application
      */
     public static int yearsToCenturies(int years)
     {
-        //Let's start!
-        return 0;
+    	if(years != 0) {
+    		double aux = years / 100.0;
+    		double floatPart = aux % 1;
+    		double intPart = aux - floatPart;
+    		
+    		if(floatPart != 0) {
+    			return (int)intPart + 1;
+    		}
+    		else
+    			return (int)intPart;
+    	}
+    	else
+    		return 0;
+        
     }
 
     /**
