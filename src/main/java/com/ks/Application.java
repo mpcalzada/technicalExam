@@ -114,8 +114,14 @@ public class Application
      */
     public static String getMiddle(String word)
     {
-        //So easy ...
-        return "";
+    	int dim = word.length();
+    	int isOdd = dim & 1;
+    	int middle = word.length()/2;
+    	
+    	if (isOdd == 1)  // odd length
+    		return Character.toString(word.charAt(middle));
+    	else // pair length
+    		return word.substring(1, dim-1);
     }
 
     /**
