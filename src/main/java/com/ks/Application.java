@@ -242,8 +242,19 @@ public class Application
      */
     public static int digital_root(int n)
     {
-        //Another easy
-        return 0;
+    	String number = n + "";
+        int dim = number.length();
+        
+        
+        if(dim == 1) 
+        	return (int)n;
+        else {
+        	int aux = 0;
+        	for(int i=0; i<dim; i++) {
+        		aux += (number.charAt(i)-'0');
+        	}
+        	return digital_root(aux);
+        }
     }
 
 
