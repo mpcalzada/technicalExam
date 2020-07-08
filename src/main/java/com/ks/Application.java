@@ -272,8 +272,24 @@ public class Application
      */
     public static String[] solution(String s)
     {
-        //Will be worse ?
-        return new String[]{};
+        //Will be worse ? Not, It will be easier xD
+    	// I'm going to considerate that whole String is pair length
+    	int dim = s.length();
+    	int isOdd = dim & 1;
+    	
+    	contador = 0;
+    	
+    	if(isOdd == 1) { // convert to pair length
+    		s = s + "_";
+    	}
+    	dim = s.length(); // update dimension
+    	String [] pairs = new String[dim/2];
+    	
+    	for(int i=0; i<dim/2; i++) {
+    		pairs[i] = s.substring(contador,contador+2);
+    		contador += 2;
+    	}
+        return pairs;
     }
 
     /**
