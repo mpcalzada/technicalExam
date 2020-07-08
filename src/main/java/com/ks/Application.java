@@ -183,8 +183,15 @@ public class Application
      */
     public static int getCount(String str)
     {
-        //...
-        return 0;
+    	String vowels = "aeiou";
+    	contador = 0;
+    	
+    	for(int i=0; i<str.length(); i++) {
+    		if(vowels.contains(Character.toString(str.charAt(i)))) {
+    			contador += 1;
+    		}
+    	}
+        return contador;
     }
 
     /**
