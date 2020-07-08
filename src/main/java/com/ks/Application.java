@@ -347,8 +347,15 @@ public class Application
      */
     public static int findShort(String s)
     {
-        //have fun!
-        return 0;
+    	contador = 50; // set a wildcard value, there are not words so big
+
+    	for(String item : s.split(" ")){
+    		int dim = item.length();
+    		if(dim < contador){
+    			contador = dim;
+    		}
+    	}
+        return contador;
     }
 
     /**
